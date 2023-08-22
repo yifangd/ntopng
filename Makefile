@@ -10,3 +10,5 @@ netflow2ng:
 all: ntop
 	echo "Done"
 
+build:
+	docker build . --rm=false -t ntopng:latest

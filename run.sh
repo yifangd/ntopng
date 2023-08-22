@@ -45,7 +45,7 @@ fi
 echo "*** Starting Redis"
 /etc/init.d/redis-server start
 echo "*** Starting netflow2ng"
-su - ntopng -c /ntop/netflow2ng-v0.0.2-8-g887b99b-linux-x86_64 &
+su - ntopng -c /ntop/netflow2ng-0.0.4 &
 echo "*** Starting ntopng"
 if [ -z "$FLOWDUMP" ]; then 
         echo -e "*** no -e FLOWDUMP switch set, expired ntopng flows will not be dumped"
