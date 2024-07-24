@@ -1,5 +1,4 @@
 #!/bin/bash
-
 echo "
 The SOHO FOSS ntopng Docker build - cobbled together for you by HomeSecSi (homesecsi@ctemplar.com)
 
@@ -40,7 +39,7 @@ User uid:    $(id -u ntopng)
 User gid:    $(id -g ntopng)"
 fi
 
-#chown ntopng:ntopng /etc/redis/redis.conf /var/log/redis
+chown ntopng:ntopng /etc/redis/redis.conf /var/log/redis
 
 echo "*** Starting Redis"
 /etc/init.d/redis-server start
@@ -49,9 +48,9 @@ su - ntopng -c /ntop/netflow2ng-0.0.4 &
 echo "*** Starting ntopng"
 if [ -z "$FLOWDUMP" ]; then 
         echo -e "*** no -e FLOWDUMP switch set, expired ntopng flows will not be dumped"
-	cd /ntop/ntopng && ./ntopng --local-networks $LOCALNET -i tcp://127.0.0.1:5556
+	cd /ntop/ntopng && ./ntopng --local-networks $LOCALNET -i tcp://127.0.0.1:5556 $ADVANCED
 else
         echo -e "*** -e FLOWDUMP switch is present, expired ntopng flows will dump with ntopng switch -F $FLOWDUMP "
-	cd /ntop/ntopng && ./ntopng --local-networks $LOCALNET -i tcp://127.0.0.1:5556 -F $FLOWDUMP
+	cd /ntop/ntopng && ./ntopng --local-networks $LOCALNET -i tcp://127.0.0.1:5556 -F $FLOWDUMP $ADVANCED
 fi
 
